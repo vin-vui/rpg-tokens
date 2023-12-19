@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+.fancy-button {
+    transition: all .5s ease;
+    outline: none;
+    box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+
+.shapedividers_com-3535 {
+    overflow: hidden;
+    position: relative;
+}
+
+.shapedividers_com-3535::before {
+    content: '';
+    font-family: 'shape divider from ShapeDividers.com';
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    bottom: -0.1vw;
+    left: -0.1vw;
+    right: -0.1vw;
+    top: -0.1vw;
+    background-size: 90px 100%;
+    background-position: 0% 50%;
+    background-image: url('data:image/svg+xml;charset=utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3.62 35.278" preserveAspectRatio="none"><path d="M.092 0S.267 27.04 3.62 35.278H.092z" opacity=".2" fill="%23fbd8c2"/><path d="M.092 0s.154 27.04 3.102 35.278H.092z" opacity=".2" fill="%23fbd8c2"/><path d="M.092 0s.131 27.04 2.646 35.278H.092zM.092 0v35.278H0V0z" fill="%23fbd8c2"/></svg>');
+}
