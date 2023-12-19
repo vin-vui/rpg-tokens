@@ -1,4 +1,7 @@
 <template>
+
+    <Head :title="title" />
+
     <div class="bg-fixed bg-cover bg-no-repeat min-h-screen bg-[url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
         <!-- https://images.unsplash.com/photo-1598985348522-aab254d10928?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
         <div class="fixed w-72 p-8 inset-y-0 flex flex-col justify-between">
@@ -73,10 +76,12 @@
 <script>
 import VanillaTilt from 'vanilla-tilt'
 import { ref, onMounted } from 'vue'
+import { Head } from '@inertiajs/vue3';
 
 export default {
     components: {
         VanillaTilt,
+        Head,
     },
 
     props: {
@@ -88,6 +93,9 @@ export default {
         },
         selectedTags: {
             type: Array,
+        },
+        title: {
+            type: String,
         },
     },
 

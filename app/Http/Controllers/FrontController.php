@@ -35,8 +35,9 @@ class FrontController extends Controller
         }
 
         $selectedTags = request()->input('tags') == null ? [] : request()->input('tags');
+        $title = $tokens->count().' tokens found';
 
-        return Inertia::render('Front/Welcome', compact('tokens', 'tags', 'selectedTags'));
+        return Inertia::render('Front/Welcome', compact('tokens', 'tags', 'selectedTags', 'title'));
     }
 
 }
