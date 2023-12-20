@@ -43,7 +43,7 @@
         </div>
 
         <div class="md:ml-72 mx-auto p-6 lg:p-8 overflow-x-hidden">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
                 <div v-for="token in tokens" :key="token.id">
                     <div ref="element" class="hover:shadow-xl cursor-pointer bg-cover rounded-md"
                         style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');">

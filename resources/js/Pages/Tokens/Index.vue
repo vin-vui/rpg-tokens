@@ -12,7 +12,7 @@
     </div>
 
     <div class="px-4 mt-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
             <TokenCard v-for="token in tokens" :key="token.id" :tags="token.tags" :token="token" @click="showTokenModal(token)" />
         </div>
     </div>
