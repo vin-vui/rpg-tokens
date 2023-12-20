@@ -48,7 +48,7 @@
                         <img :src="token.img" :alt="token.title" class="object-cover w-full h-full p-2">
                     </div>
                     <div class="w-full py-4 flex flex-col justify-between">
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between items-center gap-2">
                             <div class="flex flex-wrap items-center gap-2">
                                 <div v-for="tag in token.tags" @click="toggleTag(tag.id)"
                                     class="fancy-button font-archi cursor-pointer bg-gray-100 border-gray-100 text-gray-800 px-2 py-0.5 rounded-md text-xs transition-all duration-300 hover:text-gray-100 hover:bg-gray-800">
