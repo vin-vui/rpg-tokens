@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tag;
-use Inertia\Inertia;
-use Inertia\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index(): Response
-    {
-        $tags = Tag::all();
-
-        return Inertia::render('Tags/Index', compact('tags'));
-    }
 
     /**
      * Store a newly created resource in storage.

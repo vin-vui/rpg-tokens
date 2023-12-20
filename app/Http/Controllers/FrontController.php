@@ -16,7 +16,7 @@ class FrontController extends Controller
      */
     public function index(Request $request): Response
     {
-        $tokens = Token::with('tags')->withFilter()->get();
+        $tokens = Token::with('tags')->withFilter()->inRandomOrder()->get();
 
         foreach ($tokens as $token) {
             foreach ($token->tags as $tag) {
@@ -24,7 +24,7 @@ class FrontController extends Controller
             }
         }
 
-        $tags = Tag::whereIn('id', $tags)->get();
+        $tags = Tag::whereIn('id', $tags)->orderBy('title')->get();
 
         foreach ($tags as $tag) {
             $filteredTokens = Token::with('tags')->withFilter()->whereHas('tags', function ($query) use ($tag) {

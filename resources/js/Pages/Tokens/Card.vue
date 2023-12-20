@@ -1,16 +1,7 @@
 <template>
-    <div class="hover:shadow-xl cursor-pointer transition-all duration-200 hover:opacity-60 bg-black group">
-        <img :src="token.img" :alt="token.title" class="object-cover w-full h-full group-hover:" />
-        <!-- <div class="w-full p-4 flex flex-col justify-between">
-                <div class="flex flex-wrap items-center gap-2">
-                    <div class="text-sm text-gray-300">Tags</div>
-                    <div v-for="tag in token.tags"
-                        class="bg-gray-100 border-gray-400 text-gray-800 px-2 py-0.5 rounded-md text-xs flex items-center gap-1">
-                        <img :src="tag.img" :alt="tag.title" class="h-3">
-                        <div class="">{{ tag.title }}</div>
-                    </div>
-                </div>
-            </div> -->
+    <div class="hover:shadow-2xl cursor-pointer transition-all duration-200 z-20 p-2 hover:scale-110 hover:z-30 rounded-md"
+        style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');">
+        <img :src="token.img" :alt="token.title" class="object-cover w-full h-full" />
     </div>
 </template>
 
@@ -23,6 +14,9 @@ export default {
     },
     props: {
         token: {
+            type: Object,
+        },
+        tags: {
             type: Object,
         },
     }

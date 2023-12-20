@@ -2,9 +2,9 @@
 
     <Head :title="title" />
 
-    <div class="bg-fixed bg-cover bg-no-repeat min-h-screen bg-[url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
-        <!-- https://images.unsplash.com/photo-1598985348522-aab254d10928?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D -->
-        <div class="fixed w-72 p-8 inset-y-0 flex flex-col justify-between">
+    <div class="flex flex-col bg-fixed bg-cover bg-no-repeat min-h-screen bg-[url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
+
+        <div class="md:fixed md:w-72 px-4 py-6 md:pl-6 md:pr-0 lg:py-8 lg:pl-8 md:inset-y-0 flex flex-col justify-between">
             <div class="">
                 <div class="flex flex-col gap-6">
                     <div
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="hidden md:flex">
                 <a href="https://www.buymeacoffee.com/vinvui" target="_blank">
                     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"
                         class="fancy-button border-[#ffdd00]"
@@ -42,8 +42,8 @@
             </div>
         </div>
 
-        <div class="ml-72 mx-auto p-6 lg:p-8 ">
-            <div class="grid grid-cols-4 gap-6">
+        <div class="md:ml-72 mx-auto p-6 lg:p-8 overflow-x-hidden">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-6">
                 <div v-for="token in tokens" :key="token.id">
                     <div ref="element" class="hover:shadow-xl cursor-pointer bg-cover rounded-md"
                         style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');">
@@ -71,6 +71,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -134,7 +135,7 @@ export default {
         const element = ref(null);
 
         onMounted(() => {
-            VanillaTilt.init(element.value, { glare: true, scale: 1.1 });
+            VanillaTilt.init(element.value, { glare: true, scale: 1.1, "max-glare": 0.5 });
         });
 
         return {

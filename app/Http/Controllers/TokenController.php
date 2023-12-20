@@ -29,18 +29,6 @@ class TokenController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index(): Response
-    {
-        $tokens = Token::with('tags')->get();
-        $tags = Tag::all();
-
-        return Inertia::render('Tokens/Index', compact('tokens', 'tags'));
-    }
-
-    /**
      * Store a newly created resource in storage.
      * @param Request $request
      * @return void

@@ -1,9 +1,9 @@
 <?php
 
-use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\BackController;
 use App\Http\Controllers\TokenController;
 
 /*
@@ -24,9 +24,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/back', [BackController::class, 'index'])->name('dashboard');
 
     Route::resource('tags', TagController::class);
     Route::resource('tokens', TokenController::class);

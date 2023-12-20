@@ -1,6 +1,6 @@
 <template>
     <TransitionRoot as="template">
-        <Dialog as="div" class="relative z-10" @close="close">
+        <Dialog as="div" class="relative z-50" @close="close">
 
             <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
                 leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
@@ -34,18 +34,21 @@
                                                 <input type="hidden" v-model="form.id">
                                                 <div class="flex flex-col justify-start">
                                                     <InputLabel value="Image" />
-                                                    <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo" @change="previewImg">
+                                                    <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo"
+                                                        @change="previewImg">
                                                     <img v-if="pwImg" :src="pwImg" class="object-contain w-full mt-4" />
                                                     <InputError :message="form.errors.img" />
                                                 </div>
                                                 <div class="flex flex-col justify-start">
                                                     <InputLabel value="Tags" />
-                                                    <div class="flex gap-2 flex-wrap">
-                                                        <div v-for="tag in tags" class="flex items-center gap-1">
-                                                            <input type="checkbox" :id="tag.id" :value="tag.id" v-model="form.tags">
-                                                            <label :for="tag.id">{{ tag.title }}</label>
+                                                    <fieldset>
+                                                        <div class="flex gap-2 flex-wrap">
+                                                            <div v-for="(tag, index) in tags" class="flex items-center gap-1">
+                                                                <input type="checkbox" :id="tag.id + '_' + index" :value="tag.id" v-model="form.tags">
+                                                                <label :for="tag.id + '_' + index">{{ tag.title }}</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </fieldset>
                                                 </div>
                                             </div>
                                         </div>
@@ -139,6 +142,7 @@ export default {
                 this.form.img = this.token?.img;
                 this.pwImg = this.token?.img;
                 this.form.tags = this.token?.tags.map(tag => tag.id);
+                console.log(this.form.tags);
             },
             deep: true
         }
