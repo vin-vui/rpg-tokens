@@ -1,6 +1,8 @@
 <template>
     <AppLayout>
 
+        <Head :title="title" />
+
         <div class="flex">
             <div class="w-3/12">
                 <TagIndex :tags="tags" />
@@ -17,6 +19,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue'
 import TokenIndex from '@/Pages/Tokens/Index.vue'
 import TagIndex from '@/Pages/Tags/Index.vue'
+import { Head } from '@inertiajs/vue3';
 
 export default {
     name: 'Dashboard',
@@ -25,6 +28,7 @@ export default {
         AppLayout,
         TokenIndex,
         TagIndex,
+        Head,
     },
 
     props: {
@@ -34,6 +38,12 @@ export default {
         tags: {
             type: Array,
         },
+    },
+
+    data() {
+        return {
+            title: 'Dashboard',
+        }
     },
 }
 </script>

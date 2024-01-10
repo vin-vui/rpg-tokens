@@ -14,48 +14,49 @@
                         enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200"
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-                        <DialogPanel
-                            class="relative transform overflow-hidden bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
 
-                            <DialogTitle as="h3"
-                                class=" text-base text-center font-semibold leading-6 text-gray-50 py-2 rounded-lg"
+                        <DialogPanel class="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
+
+                            <DialogTitle as="h3" class=" text-base text-center font-semibold leading-6 text-gray-50 py-2"
                                 :class="{ 'bg-yellow-600': tag != null, 'bg-green-600': tag == null }">
                                 <span v-if="tag != null">Update Tag</span>
                                 <span v-else>Add Tag</span>
                             </DialogTitle>
 
-                            <div class="mt-3 sm:mt-5 flex flex-col gap-4">
-                                <form @submit.prevent="submit" enctype="multipart/form-data"
+                            <div class="flex flex-col gap-4 px-4 py-8">
+                                <div @submit.prevent="submit" enctype="multipart/form-data"
                                     class="flex flex-col w-full gap-4">
-
                                     <input type="hidden" v-model="form.id">
                                     <div class="flex flex-col justify-start">
                                         <InputLabel value="Title" />
                                         <input type="text" v-model="form.title">
                                         <InputError :message="form.errors.title" />
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="flex items-center justify-between gap-4 mt-4">
-                                        <button type="button"
-                                            class="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            @click="close">
-                                            <ArrowLeftIcon class="mr-1 h-5 w-5" aria-hidden="true" />
-                                            Go back
-                                        </button>
-                                        <button :loading="form.processing" :disabled="form.processing"
-                                            class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                                            <CheckIcon class="mr-1 h-5 w-5" aria-hidden="true" />
-                                            Submit
-                                        </button>
-                                    </div>
-                                </form>
+                            <div class="flex items-center justify-between gap-4 mt-2">
+                                <button type="button"
+                                    class="inline-flex w-full justify-center bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    @click="close">
+                                    <ArrowLeftIcon class="mr-1 h-5 w-5" aria-hidden="true" />
+                                    Go back
+                                </button>
+                                <div v-if="tag != null" class="flex whitespace-nowrap items-center">
+                                    <VueConfirmationButton
+                                        class="text-red-600 hover:text-red-800 transition-all duration-200"
+                                        :messages="customMessages" v-on:confirmation-success="deleteTag">
+                                    </VueConfirmationButton>
+                                </div>
+                                <button :loading="form.processing" :disabled="form.processing"
+                                    class="inline-flex w-full justify-center bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                                    <CheckIcon class="mr-1 h-5 w-5" aria-hidden="true" />
+                                    Submit
+                                </button>
                             </div>
-                            <div v-if="tag != null" class="flex justify-end mt-4">
-                                <VueConfirmationButton class="text-red-600 hover:text-red-800 transition-all duration-200"
-                                    :messages="customMessages" v-on:confirmation-success="deleteTag">
-                                </VueConfirmationButton>
-                            </div>
+
                         </DialogPanel>
+                        
                     </TransitionChild>
                 </div>
             </div>

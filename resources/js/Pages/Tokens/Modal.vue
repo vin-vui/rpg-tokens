@@ -7,7 +7,7 @@
                 <div class="fixed inset-0 backdrop-blur-md bg-white/20 transition-opacity" />
             </TransitionChild>
 
-            <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="fixed inset-0 z-10 overflow-y-auto ">
                 <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <TransitionChild as="template" enter="ease-out duration-300"
                         enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -16,65 +16,67 @@
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
 
                         <DialogPanel
-                            class="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:max-w-3xl">
+                            class="relative flex flex-col gap-4 justify-between transform overflow-hidden min-h-screen bg-white text-left shadow-xl transition-all sm:max-w-5xl">
 
-                            <DialogTitle as="h3" class=" text-base text-center font-semibold leading-6 text-gray-50 py-2"
+                            <DialogTitle as="h3" class="text-base text-center font-semibold leading-6 text-gray-50 py-2"
                                 :class="{ 'bg-yellow-600': token != null, 'bg-green-600': token == null }">
                                 <span v-if="token != null">Update Token</span>
                                 <span v-else>Add Token</span>
                             </DialogTitle>
 
-                            <div class="px-4 ">
-                                <div class="mt-3 sm:mt-5 flex gap-4">
-                                    <div class="flex flex-col w-full gap-4">
-
-                                        <div class="flex gap-8">
-                                            <!-- form -->
-                                            <div class="flex gap-2">
-                                                <input type="hidden" v-model="form.id">
-                                                <div class="flex flex-col justify-start">
-                                                    <InputLabel value="Image" />
-                                                    <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo"
-                                                        @change="previewImg">
-                                                    <img v-if="pwImg" :src="pwImg" class="object-contain w-full mt-4" />
-                                                    <InputError :message="form.errors.img" />
-                                                </div>
-                                                <div class="flex flex-col justify-start">
-                                                    <InputLabel value="Tags" />
-                                                    <fieldset>
-                                                        <div class="flex gap-2 flex-wrap">
-                                                            <div v-for="(tag, index) in tags" class="flex items-center gap-1">
-                                                                <input type="checkbox" :id="tag.id + '_' + index" :value="tag.id" v-model="form.tags">
-                                                                <label :for="tag.id + '_' + index">{{ tag.title }}</label>
-                                                            </div>
+                            <div class="flex gap-4 grow">
+                                <div class="flex flex-col h-full w-full gap-4">
+                                    <div class="flex gap-8 px-4">
+                                        <!-- form -->
+                                        <div class="flex gap-4">
+                                            <input type="hidden" v-model="form.id">
+                                            <!-- Image -->
+                                            <div class="flex flex-col justify-start basis-1/2">
+                                                <InputLabel value="Image" />
+                                                <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo"
+                                                    @change="previewImg">
+                                                <img v-if="pwImg" :src="pwImg" class="object-contain bg-cover w-full mt-4 p-2 rounded-md bg-[url('./annie-spratt-xvU-X0GV9-o-unsplash.webp')]" />
+                                                <img v-if="!pwImg" class="h-96 object-contain bg-cover w-full mt-4 p-2 rounded-md bg-[url('./annie-spratt-xvU-X0GV9-o-unsplash.webp')]" />
+                                                <InputError :message="form.errors.img" />
+                                            </div>
+                                            <!-- Tags -->
+                                            <div class="flex flex-col justify-start basis-1/2">
+                                                <InputLabel value="Tags" />
+                                                <fieldset>
+                                                    <div class="flex gap-2 flex-wrap">
+                                                        <div v-for="(tag, index) in tags"
+                                                            class="flex items-center gap-1 bg-gray-100 py-1 px-2 cursor-pointer">
+                                                            <input type="checkbox" :id="tag.id + '_' + index"
+                                                                :value="tag.id" v-model="form.tags" class="cursor-pointer">
+                                                            <label :for="tag.id + '_' + index" class="cursor-pointer">{{
+                                                                tag.title }}</label>
                                                         </div>
-                                                    </fieldset>
-                                                </div>
+                                                    </div>
+                                                </fieldset>
                                             </div>
-                                        </div>
-
-                                        <div class="flex items-center justify-between gap-4 my-4">
-                                            <button type="button"
-                                                class="inline-flex w-full justify-center bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                                @click="close">
-                                                <ArrowLeftIcon class="mr-1 h-5 w-5" aria-hidden="true" />
-                                                Go back
-                                            </button>
-                                            <div v-if="token != null" class="flex justify-center w-full">
-                                                <VueConfirmationButton
-                                                    class="text-red-600 hover:text-red-800 transition-all duration-200"
-                                                    :messages="customMessages" v-on:confirmation-success="deleteToken">
-                                                </VueConfirmationButton>
-                                            </div>
-                                            <button :loading="form.processing" :disabled="form.processing" @click="submit"
-                                                class="inline-flex w-full justify-center bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
-                                                <CheckIcon class="mr-1 h-5 w-5" aria-hidden="true" />
-                                                Submit
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="flex items-center justify-between gap-4">
+                                <button type="button"
+                                    class="inline-flex w-full justify-center bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    @click="close">
+                                    <ArrowLeftIcon class="mr-1 h-5 w-5" aria-hidden="true" />
+                                    Go back
+                                </button>
+                                <div v-if="token != null" class="flex justify-center w-full">
+                                    <VueConfirmationButton
+                                        class="text-red-600 hover:text-red-800 transition-all duration-200"
+                                        :messages="customMessages" v-on:confirmation-success="deleteToken">
+                                    </VueConfirmationButton>
+                                </div>
+                                <button :loading="form.processing" :disabled="form.processing" @click="submit"
+                                    class="inline-flex w-full justify-center bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                                    <CheckIcon class="mr-1 h-5 w-5" aria-hidden="true" />
+                                    Submit
+                                </button>
                             </div>
 
                         </DialogPanel>
@@ -142,7 +144,6 @@ export default {
                 this.form.img = this.token?.img;
                 this.pwImg = this.token?.img;
                 this.form.tags = this.token?.tags.map(tag => tag.id);
-                console.log(this.form.tags);
             },
             deep: true
         }
