@@ -117,6 +117,7 @@ export default {
                 { value: 'class', text: 'Class' },
                 { value: 'race', text: 'Race' },
                 { value: 'alignment', text: 'Alignment' },
+                { value: 'weapon', text: 'Weapon' },
                 { value: 'miscellaneous', text: 'Miscellaneous' },
             ],
             preview: '',
