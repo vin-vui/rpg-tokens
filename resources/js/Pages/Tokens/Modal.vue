@@ -48,16 +48,17 @@
                                                 <!-- <InputLabel value="Tags" /> -->
                                                 <fieldset>
                                                     <div v-for="(tagsOfType, type) in groupedTags" :key="type" class="mb-4">
-            <legend class="font-semibold mb-2">{{ type }}</legend>
-                                                    <div class="flex gap-2 flex-wrap">
-                                                        <div v-for="(tag, index) in tagsOfType"
-                                                            class="flex items-center gap-1 bg-gray-100 py-1 px-2 cursor-pointer">
-                                                            <input type="checkbox" :id="tag.id + '_' + index"
-                                                                :value="tag.id" v-model="form.tags" class="cursor-pointer">
-                                                            <label :for="tag.id + '_' + index" class="cursor-pointer">{{
-                                                                tag.title }}</label>
+                                                        <legend class="font-semibold mb-2">{{ type }}</legend>
+                                                        <div class="flex gap-2 flex-wrap">
+                                                            <div v-for="(tag, index) in tagsOfType"
+                                                                class="flex items-center gap-1 bg-gray-100 py-1 px-2 cursor-pointer">
+                                                                <input type="checkbox" :id="tag.id + '_' + index"
+                                                                    :value="tag.id" v-model="form.tags"
+                                                                    class="cursor-pointer">
+                                                                <label :for="tag.id + '_' + index" class="cursor-pointer">{{
+                                                                    tag.title }}</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </fieldset>
                                             </div>
