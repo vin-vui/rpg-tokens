@@ -35,8 +35,8 @@
                                                 <InputLabel value="Image" />
                                                 <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo"
                                                     @change="previewImg">
-                                                <img v-if="pwImg" :src="pwImg" class="object-contain bg-cover w-full mt-4 p-2 rounded-md bg-[url('./annie-spratt-xvU-X0GV9-o-unsplash.webp')]" />
-                                                <img v-if="!pwImg" class="h-96 object-contain bg-cover w-full mt-4 p-2 rounded-md bg-[url('./annie-spratt-xvU-X0GV9-o-unsplash.webp')]" />
+                                                <img v-if="pwImg" :src="pwImg" class="object-contain bg-cover w-full mt-4 p-2 rounded-md" style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
+                                                <img v-if="!pwImg" class="h-96 object-contain bg-cover w-full mt-4 p-2 rounded-md" style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
                                                 <InputError :message="form.errors.img" />
                                             </div>
                                             <!-- Tags -->
