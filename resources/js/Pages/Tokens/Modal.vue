@@ -35,22 +35,29 @@
                                                 <InputLabel value="Image" />
                                                 <input type="file" accept="image/jpeg, image/png, image/svg" ref="photo"
                                                     @change="previewImg">
-                                                <img v-if="pwImg" :src="pwImg" class="object-contain bg-cover w-full mt-4 p-2 rounded-md" style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
-                                                <img v-if="!pwImg" class="h-96 object-contain bg-cover w-full mt-4 p-2 rounded-md" style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
+                                                <img v-if="pwImg" :src="pwImg"
+                                                    class="object-contain bg-cover w-full mt-4 p-2 rounded-md"
+                                                    style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
+                                                <img v-if="!pwImg"
+                                                    class="h-96 object-contain bg-cover w-full mt-4 p-2 rounded-md"
+                                                    style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');" />
                                                 <InputError :message="form.errors.img" />
                                             </div>
                                             <!-- Tags -->
                                             <div class="flex flex-col justify-start basis-1/2">
-                                                <InputLabel value="Tags" />
+                                                <!-- <InputLabel value="Tags" /> -->
                                                 <fieldset>
+                                                    <div v-for="(tagsOfType, type) in groupedTags" :key="type" class="mb-4">
+            <legend class="font-semibold mb-2">{{ type }}</legend>
                                                     <div class="flex gap-2 flex-wrap">
-                                                        <div v-for="(tag, index) in tags"
+                                                        <div v-for="(tag, index) in tagsOfType"
                                                             class="flex items-center gap-1 bg-gray-100 py-1 px-2 cursor-pointer">
                                                             <input type="checkbox" :id="tag.id + '_' + index"
                                                                 :value="tag.id" v-model="form.tags" class="cursor-pointer">
                                                             <label :for="tag.id + '_' + index" class="cursor-pointer">{{
                                                                 tag.title }}</label>
                                                         </div>
+                                                    </div>
                                                     </div>
                                                 </fieldset>
                                             </div>
@@ -176,6 +183,18 @@ export default {
             this.form.clearErrors()
             this.$emit('close')
         },
+    },
+
+    computed: {
+        groupedTags() {
+            return this.tags.reduce((grouped, tag) => {
+                if (!grouped[tag.type]) {
+                    grouped[tag.type] = [];
+                }
+                grouped[tag.type].push(tag);
+                return grouped;
+            }, {});
+        }
     },
 };
 </script>
