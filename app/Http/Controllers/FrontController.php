@@ -35,10 +35,13 @@ class FrontController extends Controller
             $tag->tokens_count = $filteredTokens->count();
         }
 
+        // Group tags by type
+        $groupedTags = $tags->groupBy('type');
+
         $selectedTags = request()->input('tags') == null ? [] : request()->input('tags');
         $title = $tokens->count().' tokens found';
 
-        return Inertia::render('Front/Welcome', compact('tokens', 'tags', 'selectedTags', 'title'));
+        return Inertia::render('Front/Welcome', compact('tokens', 'tags', 'groupedTags', 'selectedTags', 'title'));
     }
 
 }

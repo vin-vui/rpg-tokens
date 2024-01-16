@@ -18,6 +18,7 @@ class TagController extends Controller
     {
         $validated = Validator::make($request->all(), [
             'title' => 'required',
+            'type' => 'required'
         ])->validate();
 
         Tag::updateOrCreate(['id' => $request->id], $validated);

@@ -15,7 +15,8 @@
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
 
-                        <DialogPanel class="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
+                        <DialogPanel
+                            class="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-xl">
 
                             <DialogTitle as="h3" class=" text-base text-center font-semibold leading-6 text-gray-50 py-2"
                                 :class="{ 'bg-yellow-600': tag != null, 'bg-green-600': tag == null }">
@@ -24,13 +25,25 @@
                             </DialogTitle>
 
                             <div class="flex flex-col gap-4 px-4 py-8">
-                                <div @submit.prevent="submit" enctype="multipart/form-data"
-                                    class="flex flex-col w-full gap-4">
-                                    <input type="hidden" v-model="form.id">
+                                <input type="hidden" v-model="form.id">
+                                <div class="flex flex-col w-full gap-4">
                                     <div class="flex flex-col justify-start">
                                         <InputLabel value="Title" />
                                         <input type="text" v-model="form.title">
                                         <InputError :message="form.errors.title" />
+                                    </div>
+                                </div>
+                                <div class="flex flex-col w-full gap-4">
+                                    <input type="hidden" v-model="form.id">
+                                    <div class="flex flex-col justify-start">
+                                        <InputLabel value="Type" />
+                                        <select v-model="form.type" class="">
+                                            <option v-for="option in selectOptions" :key="option.value"
+                                                :value="option.value">
+                                                {{ option.text }}
+                                            </option>
+                                        </select>
+                                        <InputError :message="form.errors.type" />
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +110,13 @@ export default {
             form: this.$inertia.form({
                 id: null,
                 title: '',
+                type: '',
             }),
+            selectOptions: [
+                { value: 'gender', text: 'Gender' },
+                { value: 'class', text: 'Class' },
+                { value: 'race', text: 'Race' },
+            ],
             preview: '',
             customMessages: [
                 'Delete Tag',
@@ -112,6 +131,7 @@ export default {
             handler() {
                 this.form.id = this.tag?.id;
                 this.form.title = this.tag?.title;
+                this.form.type = this.tag?.type;
             },
             deep: true
         }

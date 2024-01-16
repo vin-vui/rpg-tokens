@@ -1,5 +1,4 @@
 <template>
-
     <div class="px-4 py-2 flex items-center justify-between bg-white sticky top-0 z-40">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Tags
@@ -12,13 +11,15 @@
     </div>
 
     <div class="px-4 mt-8">
-        <div class="flex flex-wrap gap-4">
-            <TagCard v-for="tag in tags" :key="tag.id" :tag="tag" @click="showModal(tag)" />
+        <div v-for="(tagsOfType, type) in groupedTags" :key="type">
+            <h3 class="font-semibold mt-6 mb-2 uppercase bg-gray-200 py-1 px-2">{{ type }}</h3>
+            <div class="flex flex-wrap gap-4">
+                <TagCard v-for="tag in tagsOfType" :key="tag.id" :tag="tag" @click="showModal(tag)" />
+            </div>
         </div>
     </div>
 
     <TagModal :tag="selectedTag" :show="isModalVisible" @close="closeModal" />
-
 </template>
 
 <script>
@@ -56,6 +57,19 @@ export default {
         closeModal() {
             this.isModalVisible = false;
         }
-    }
+    },
+
+    computed: {
+        groupedTags() {
+            const grouped = {};
+            this.tags.forEach(tag => {
+                if (!grouped[tag.type]) {
+                    grouped[tag.type] = [];
+                }
+                grouped[tag.type].push(tag);
+            });
+            return grouped;
+        }
+    },
 }
 </script>
