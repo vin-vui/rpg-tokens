@@ -18,9 +18,9 @@
                     </button>
                 </div>
                 <div class="mt-6">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <div v-for="(tagsOfType, type) in groupedTags" :key="type" class="mb-6">
-                            <h3 class="font-annie uppercase text-white font-semibold">{{ type }}</h3>
+                    <div v-for="(tagsOfType, type) in groupedTags" :key="type" class="mb-6">
+                        <h3 class="font-annie uppercase text-white font-semibold">{{ type }}</h3>
+                        <div class="flex flex-wrap items-center gap-2">
                             <button :id="tag.id" :value="tag.id" v-for="tag in tagsOfType"
                                 class="font-archi flex items-center gap-2 fancy-button border-2 px-2 py-1" :class="{
                                     'border-gray-800 bg-gray-800 text-gray-100 hover:text-gray-800 hover:bg-gray-100 hover:border-gray-100': selectedTags.includes(tag.id.toString()),
@@ -110,9 +110,6 @@ export default {
             type: Object,
         },
         tags: {
-            type: Object,
-        },
-        groupedTags: {
             type: Object,
         },
         selectedTags: {

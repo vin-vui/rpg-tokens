@@ -15,7 +15,7 @@ class BackController extends Controller
      */
     public function index(): Response
     {
-        $tags = Tag::groupBy('type')->orderBy('title')->get();
+        $tags = Tag::orderBy('title')->get();
         $tokens = Token::with('tags')->latest()->get();
 
         return Inertia::render('Dashboard', compact('tags', 'tokens'));
