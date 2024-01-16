@@ -116,6 +116,8 @@ export default {
                 { value: 'gender', text: 'Gender' },
                 { value: 'class', text: 'Class' },
                 { value: 'race', text: 'Race' },
+                { value: 'alignment', text: 'Alignment' },
+                { value: 'miscellaneous', text: 'Miscellaneous' },
             ],
             preview: '',
             customMessages: [
