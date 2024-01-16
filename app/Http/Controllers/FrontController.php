@@ -16,6 +16,7 @@ class FrontController extends Controller
      */
     public function index(Request $request): Response
     {
+        $tags = [];
         $tokens = Token::with('tags')->withFilter()->inRandomOrder()->get();
 
         foreach ($tokens as $token) {
