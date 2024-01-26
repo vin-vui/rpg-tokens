@@ -221,7 +221,6 @@ export default {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src;
-                        img.classList.add('show');
                         observer.unobserve(img);
                     }
                 });
