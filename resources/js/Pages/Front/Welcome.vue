@@ -39,7 +39,7 @@
             <div class="hidden md:flex">
                 <a href="https://www.buymeacoffee.com/vinvui" target="_blank">
                     <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee"
-                        class="fancy-button border-[#ffdd00]" style="height: 60px !important;width: 217px !important;">
+                        class="fancy-button border-[#ffdd00]" style="height: 60px !important; width: 217px !important;">
                 </a>
             </div>
         </div>
@@ -47,10 +47,10 @@
         <div class="md:ml-72 mx-auto p-6 lg:p-8 overflow-x-hidden">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6">
                 <div v-for="token in tokens" :key="token.id">
-                    <div ref="element" :id="'print_' + token.id"
-                        class="hover:shadow-xl cursor-pointer p-2 bg-cover rounded-md"
+                    <div ref="element" :id="'print_' + token.id">
+                        <img ref="imageRef" :data-src="token.img" :alt="token.title"
+                        class="object-cover w-full h-full image-loaded hover:shadow-xl cursor-pointer p-2 bg-cover rounded-md"
                         style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');">
-                        <img ref="imageRef" :data-src="token.img" :alt="token.title" class="object-cover w-full h-full">
                     </div>
                     <div class="w-full py-4 flex flex-col justify-between">
                         <div class="flex justify-between items-center gap-2">
@@ -133,6 +133,7 @@ export default {
 
         this.$refs.imageRef.forEach((ref) => {
             this.refs.push(ref);
+            ref.classList.add('show');
         });
     },
 
@@ -220,6 +221,7 @@ export default {
                     if (entry.isIntersecting) {
                         const img = entry.target;
                         img.src = img.dataset.src;
+                        img.classList.add('show');
                         observer.unobserve(img);
                     }
                 });
@@ -228,6 +230,7 @@ export default {
             nextTick(() => {
                 refs.value.forEach((ref) => {
                     observer.observe(ref);
+                    ref.classList.add('show');
                 });
             });
         });
