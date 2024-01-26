@@ -13,16 +13,6 @@
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
-.image-loaded {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.image-loaded.show {
-    opacity: 1;
-}
-
-
 .shapedividers_com-3535 {
     overflow: hidden;
     position: relative;

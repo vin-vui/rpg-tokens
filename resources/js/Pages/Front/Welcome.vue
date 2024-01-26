@@ -133,7 +133,6 @@ export default {
 
         this.$refs.imageRef.forEach((ref) => {
             this.refs.push(ref);
-            ref.classList.add('show');
         });
     },
 
