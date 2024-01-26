@@ -230,7 +230,6 @@ export default {
             nextTick(() => {
                 refs.value.forEach((ref) => {
                     observer.observe(ref);
-                    ref.classList.add('show');
                 });
             });
         });
