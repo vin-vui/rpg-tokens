@@ -50,7 +50,7 @@
                     <div ref="element" :id="'print_' + token.id"
                         class="hover:shadow-xl cursor-pointer p-2 bg-cover rounded-md"
                         style="background-image: url('./annie-spratt-xvU-X0GV9-o-unsplash.webp');">
-                        <img :src="token.img" :alt="token.title" class="object-cover w-full h-full">
+                        <img ref="imageRef" :data-src="token.img" :alt="token.title" class="object-cover w-full h-full">
                     </div>
                     <div class="w-full py-4 flex flex-col justify-between">
                         <div class="flex justify-between items-center gap-2">
@@ -96,7 +96,7 @@
 
 <script>
 import VanillaTilt from 'vanilla-tilt'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { Head } from '@inertiajs/vue3';
 
 export default {
@@ -130,6 +130,10 @@ export default {
 
     mounted() {
         this.selected.tags = this.selectedTags;
+
+        this.$refs.imageRef.forEach((ref) => {
+            this.refs.push(ref);
+        });
     },
 
     computed: {
@@ -205,13 +209,33 @@ export default {
 
     setup() {
         const element = ref(null);
+        const imageRef = ref(null);
+        const refs = ref([]);
 
         onMounted(() => {
             VanillaTilt.init(element.value, { glare: true, scale: 1.1, "max-glare": 0.5 });
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            nextTick(() => {
+                refs.value.forEach((ref) => {
+                    observer.observe(ref);
+                });
+            });
         });
 
         return {
-            element
+            element,
+            imageRef,
+            refs
         };
     }
 }
